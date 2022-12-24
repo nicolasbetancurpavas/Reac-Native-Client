@@ -2,12 +2,12 @@ import React from 'react'
 import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from "@expo/vector-icons"
-import Vendedor from '../Screen/Vendedor'
-import Ventas from '../Screen/Ventas'
-import other from '../Screen/other'
+import StackHome from '../Stacks/StackHome'
+import StackMain from '../Stacks/StackMain';
 
-const principalColor = '#167156'
-const subColor = '#9E9E9E'
+
+const principalColor = '#2884E0'
+const subColor = '#6A10C3'
 
 const styles = StyleSheet.create(
     {
@@ -18,6 +18,20 @@ const styles = StyleSheet.create(
         },
         ocultar: {
             display: 'none'
+        },
+
+        container: {
+            marginTop: 0,
+            maxWidth: 450,
+            width: '100%',
+            height: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'red',
+            margin: 'auto',
+            padding: 0,
+            backgroundColor: '#E9E9E9',
         }
     }
 )
@@ -28,43 +42,36 @@ export default function NavigationBottomStack() {
 
     return (
         <Tab.Navigator
-            initialRouteName='Vendedor'
+            style={styles.container}
+            initialRouteName='Home'
             screenOptions={{
-                headerShown: false
+                headerShown: false,
             }}
             tabBarOptions={{
                 activeTintColor: "white",
                 activeBackgroundColor: `${subColor}`,
                 inactiveTintColor: "#FFF",
-                inactiveBackgroundColor: `${principalColor}`
+                inactiveBackgroundColor: `${principalColor}`,
+
             }}
 
         >
             <Tab.Screen
-                style={{ color: 'black' }}
-                name='Vendedor'
-                component={Vendedor}
+                style={{ color: 'black', }}
+                name='Home'
+                component={StackHome}
                 options={{
-                    title: 'Registar', tabBarIcon: ({ color, size }) => (
+                    tabBarStyle: { display: 'none' },
+                    title: 'Home', tabBarIcon: ({ color, size }) => (
                         <Ionicons name='md-clipboard-sharp' style={styles.IconStyle} color={color} size={size}></Ionicons>
                     )
 
                 }}
             />
 
-            <Tab.Screen
-                name='Ventas'
-                component={Ventas}
-                options={{
-                    title: 'ventas', tabBarIcon: ({ color, size }) => (
-                        <Ionicons name='md-folder-open-outline' style={styles.IconStyle} color={color} size={size}></Ionicons>
-                    )
-                }}
 
-            />
-
-            <Tab.Screen name='other'
-                component={other}
+            <Tab.Screen name='Main'
+                component={StackMain}
                 options={{
                     title: 'otro', tabBarIcon: ({ color, size }) => (
                         <Ionicons name='ios-rocket' style={styles.IconStyle} color={color} size={size}></Ionicons>
